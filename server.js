@@ -22,7 +22,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      maxAge:120000,
+      maxAge:600000,
     },
   })
 );
@@ -76,10 +76,19 @@ app.post("/upload",async(req,res)=>
 {
     const files =[];
     const filenames=[];
-    for(obj of req.files.file)
+    if(Array.isArray(req.files.file))
     {
-        files.push(obj);
-        filenames.push(obj.name)
+      for(obj of req.files.file)
+      {
+          files.push(obj);
+          filenames.push(obj.name)
+      }
+
+    }
+    else
+    {
+      files.push(req.files.file);
+      filenames.push(req.files.file);
     }
     for(obj of filenames)
     {
