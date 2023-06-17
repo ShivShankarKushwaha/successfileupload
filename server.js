@@ -74,8 +74,8 @@ app.get("/user",(req,res)=>
 })
 app.post("/upload",async(req,res)=>
 {
-    const files =[null];
-    const filenames=[null];
+    const files =[];
+    const filenames=[];
     if(Array.isArray(req.files.file))
     {
       for(obj of req.files.file)
@@ -89,6 +89,11 @@ app.post("/upload",async(req,res)=>
     {
       files.push(req.files.file);
       filenames.push(req.files.file);
+      let file = req.files.file;
+      file.mv('./uploads/'+file.name);
+      res.redirect('/upload');
+      return;
+
     }
     for(obj of filenames)
     {
