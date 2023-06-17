@@ -11,7 +11,14 @@
 <body>
     <form class="flex flex-col w-1/2 mx-auto m-5 border-2 border-slate-500 p-10" action="/upload" method="post" enctype="multipart/form-data">
         <input class="mx-auto" type="file" name="file" id="file" multiple>
-        <button  type="submit" class="p-1 text-xl bg-blue-800 text-white w-fit mx-auto m-5">Upload</button>
+        <button  type="submit" class="p-1 text-xl bg-blue-800 text-white w-full mx-auto m-5">Upload</button>
     </form>
+    <button class="bg-[green] text-2xl p-1 text-white w-1/2 mx-auto text-center " style="margin-left:auto ; margin: auto; justify-content: center; display: flex;" onclick="another()">See Documents</button>
 </body>
+<script>
+    function another()
+    {
+        window.location.href='/upload'
+    }
+</script>
 </html>

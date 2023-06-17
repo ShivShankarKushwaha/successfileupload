@@ -22,7 +22,7 @@
             <tbody id="contents">
             </tbody>
         </table>
-        <button class="bg-green-600 active:bg-green-900 p-2 text-xl text-center mx-auto w-fit text-white border-2 border-red-600 m-10" style="text-align: center; margin-left: auto;">Upload a file</button>
+        <button class="bg-green-600 active:bg-green-900 p-2 text-xl text-center mx-auto w-fit text-white border-2 border-red-600 m-10" style="text-align: center; margin-left: auto;" onclick="another()">Upload a file</button>
     </div>
 </body>
 <script>
@@ -67,6 +67,9 @@
             console.log('could not delete');
         }
     }
-    
+    function another()
+    {
+        window.location.href='/user'
+    }
 </script>
 </html>

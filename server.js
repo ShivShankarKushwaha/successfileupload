@@ -74,8 +74,8 @@ app.get("/user",(req,res)=>
 })
 app.post("/upload",async(req,res)=>
 {
-    const files =[];
-    const filenames=[];
+    const files =[null];
+    const filenames=[null];
     if(Array.isArray(req.files.file))
     {
       for(obj of req.files.file)
