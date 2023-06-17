@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://th.bing.com/th/id/OIP.gxxv2h1wj-gnY-69uVQksQHaF7?pid=ImgDet&rs=1" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="text-2xl font-bold text-blue-800 text-center m-5">These are uploaded files</h1>
+    <div >
+        <table class="table table-auto border-2 w-1/2 mx-auto text-xl">
+            <thead>
+                <tr class="text-center">
+                    <th >File name</th>
+                    <th>Open</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="contents">
+                
+                <tr class="border-2 m-1 h-16 text-center">
+                    <td>Automata</td>
+                    <td><button class="bg-blue-700 p-1 text-white hover:bg-blue-800">Open</button></td>
+                    <td><button class="bg-red-700 text-white p-1 hover:bg-red-800">delete</button></td>
+                </tr>
+                <tr class="border-2 m-1 h-16 text-center">
+                    <td>DSA</td>
+                    <td><button class="bg-blue-700 p-1 text-white hover:bg-blue-800">Open</button></td>
+                    <td>
+                        <form action="/open" method="post">
+                            <input type="text" name="filename" style="display: none;">
+                            <button type="submit" class="bg-red-700 text-white p-1 hover:bg-red-800">delete</button>
+                        </form>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    let contents = document.getElementById('contents');
+    fetch('/files')
+    .then(result=>result.json())
+    .then(responce=>
+    {
+        console.log(responce);
+        let html ="";
+        for(obj of responce)
+        {
+            console.log(obj);
+            html+=`
+            <tr class="border-2 m-1 h-16 text-center">
+                    <td>${obj}</td>
+                    <td>
+                         <form action="/open/${encodeURIComponent(obj)}" method="post">
+                            <button class="bg-blue-700 p-1 text-white hover:bg-blue-800" value=${obj} onclick="openfile(e)">Open</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/delete/${encodeURIComponent(obj)}" method="post">
+                            <button type='submit' class="bg-red-700 text-white p-1 hover:bg-red-800" value=${obj} '>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            `
+        }
+        contents.innerHTML=html;
+    })
+    function checkdelete()
+    {
+        console.log('check delete function');
+        const resp = confirm('Do You want to delete it:');
+        if(resp)
+        {
+            console.log('deleted');
+        }
+        else
+        {
+            console.log('could not delete');
+        }
+    }
+    
+</script>
+</html>
